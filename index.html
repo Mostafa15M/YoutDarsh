@@ -14,33 +14,24 @@
             --neon-purple: #bc13fe;
             --text-main: #f8fafc;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
-
         body {
             min-height: 100vh; background: var(--bg-dark); color: var(--text-main);
             display: flex; flex-direction: column; align-items: center; padding: 0 20px;
             overflow-x: hidden; position: relative;
-            background-image: radial-gradient(circle at 10% 20%, rgba(0,242,255,0.05) 0%, transparent 20%),
-                              radial-gradient(circle at 90% 80%, rgba(188,19,254,0.05) 0%, transparent 20%);
         }
-
         .star {
             position: absolute; width: 150px; height: 150px;
             background: radial-gradient(circle, rgba(0, 242, 255, 0.08) 0%, transparent 70%);
             border-radius: 50%; z-index: -1; animation: move 20s infinite alternate ease-in-out;
         }
-
-        @keyframes move { from { transform: translate(0, 0); } to { transform: translate(50px, 50px); } }
-
+        @keyframes move { from { transform: translate(0, 0); } to { transform: translate(50px, 100px); } }
         .container { 
             width: 100%; max-width: 500px; z-index: 10; 
             display: flex; flex-direction: column; align-items: center;
             margin-top: 60px; animation: fadeIn 0.8s ease;
         }
-
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
         .logo-area { text-align: center; margin-bottom: 40px; }
         .logo {
             font-size: 50px; font-weight: 900;
@@ -50,65 +41,35 @@
         }
         @keyframes colorShift { 0%{background-position:0%} 100%{background-position:200%} }
         .subtitle { color: #94a3b8; font-size: 16px; margin-top: 5px; }
-
         .platforms { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; }
         .p-icon { 
             width: 65px; height: 65px; background: var(--glass); border: 1px solid rgba(255,255,255,0.05);
             border-radius: 18px; display: flex; align-items: center; justify-content: center;
-            font-size: 26px; backdrop-filter: blur(10px); transition: 0.3s;
+            font-size: 26px; backdrop-filter: blur(10px);
         }
-        .p-icon:hover { transform: translateY(-5px); border-color: var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue); }
-
         .glass-card {
             width: 100%; background: var(--glass); backdrop-filter: blur(15px);
             border: 1px solid rgba(255,255,255,0.1); padding: 35px 25px;
             border-radius: 28px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
         }
-
         #url {
             width: 100%; padding: 22px; border-radius: 18px; border: 2px solid #1e293b;
             background: #0a1120; color: white; margin-bottom: 25px; text-align: center;
-            font-size: 16px; outline: none; transition: 0.3s;
+            font-size: 16px; outline: none;
         }
-        #url:focus { border-color: var(--neon-blue); box-shadow: 0 0 10px rgba(0,242,255,0.2); }
-
         .main-btn {
             width: 100%; padding: 20px; border: none; border-radius: 18px;
             font-weight: 900; font-size: 18px; color: white; cursor: pointer;
             background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-            box-shadow: 0 5px 15px rgba(188, 19, 254, 0.3); transition: 0.3s;
         }
-        .main-btn:hover { transform: scale(1.02); box-shadow: 0 0 25px var(--neon-purple); }
-        .main-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-
-        .tg-link {
-            display: inline-flex; align-items: center; gap: 8px;
-            color: #94a3b8; text-decoration: none; font-weight: bold;
-            transition: 0.3s; cursor: pointer; margin-top: 20px;
-        }
-        .tg-link:hover { color: var(--neon-blue); transform: scale(1.05); }
-
-        .quality-header { background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple)); padding: 15px; border-radius: 15px; font-weight: 800; text-align: center; margin-bottom: 20px; color: white; }
-        .quality-item { 
-            display: flex; justify-content: space-between; align-items: center; 
-            background: rgba(255,255,255,0.03); padding: 18px 20px; border-radius: 15px; 
-            margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.3s;
-        }
-        .quality-item:hover { background: rgba(255,255,255,0.08); border-color: var(--neon-blue); }
-
-        .loader {
-            border: 4px solid #f3f3f3; border-top: 4px solid var(--neon-blue);
-            border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite;
-            display: none; margin: 10px auto;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        footer { margin-top: auto; padding: 30px 0; font-size: 12px; text-align: center; }
+        .quality-header { background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple)); padding: 15px; border-radius: 15px; font-weight: 800; text-align: center; margin-bottom: 20px; }
+        .quality-item { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); padding: 18px 20px; border-radius: 15px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.05); cursor: pointer; }
+        footer { margin-top: 50px; padding-bottom: 30px; font-size: 12px; }
     </style>
 </head>
 <body>
 
-    <div class="star"></div><div class="star"></div>
+    <div class="star"></div><div class="star"></div><div class="star"></div>
 
     <div class="container" id="main-page">
         <div class="logo-area">
@@ -125,11 +86,10 @@
 
         <div class="glass-card">
             <input type="text" id="url" placeholder="أدخل رابط الفيديو هنا...">
-            <div id="loader" class="loader"></div>
-            <button id="download-btn" class="main-btn" onclick="handleDarshDownload()">تحميل ⬇</button>
-            <div style="text-align: center;">
-                <a href="https://t.me/DarshEgypt" target="_blank" class="tg-link">
-                   BY DARSH EGYPT <i class="fab fa-telegram" style="color: #24A1DE;"></i>
+            <button class="main-btn" id="btn-text" onclick="handleDarshDownload()">تحميل ⬇</button>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="https://t.me/DarshEgypt" target="_blank" style="color: #94a3b8; text-decoration: none; font-weight: bold;">
+                   BY DARSH EGYPT <i class="fab fa-telegram"></i>
                 </a>
             </div>
         </div>
@@ -137,78 +97,72 @@
 
     <div class="container" id="qualities-page" style="display:none;">
         <div class="glass-card">
-            <div class="quality-header">⬇ الروابط الجاهزة (صوت + صورة)</div>
+            <div class="quality-header">⬇ الروابط المتاحة بالصوت </div>
             <div id="list-v"></div>
-            <button class="tab" style="width:100%; margin-top:20px; border: 2px dashed var(--neon-blue); background: transparent; color: white; padding: 15px; border-radius: 15px; cursor: pointer;" onclick="location.reload()">الرجوع للرئيسية ☄️</button>
+            <button class="tab" style="width:100%; margin-top:20px; border: 1px dashed var(--neon-blue); background: transparent; color: white; padding: 10px; border-radius: 10px;" onclick="location.reload()">العودة للخلف 🔙</button>
         </div>
     </div>
 
     <footer>
-        <a href="https://t.me/DarshEgypt" target="_blank" style="color: #94a3b8; text-decoration: none;">
-            BY DARSH EGYPT © 2026
-        </a>
+        BY DARSH EGYPT © 2026
     </footer>
 
     <script>
         async function handleDarshDownload() {
             const inputUrl = document.getElementById('url').value.trim();
-            const btn = document.getElementById('download-btn');
-            const loader = document.getElementById('loader');
+            if(!inputUrl) return alert("ادخل الرابط 🗝️");
+            
+            document.getElementById('btn-text').innerText = "جاري الفحص... ✨";
 
-            if(!inputUrl) return alert("من فضلك أدخل الرابط أولاً 🗝️");
-
-            // تشغيل الانيميشن
-            btn.style.display = 'none';
-            loader.style.display = 'block';
-
+            // استدعاء الـ API بتاعك الأصلي
             try {
-                // استخدام محرك VkrDownloader لأنه الأفضل في دمج الصوت للفيديو تلقائياً
-                const response = await fetch(`https://api.vkrdownloader.com/server?v=${encodeURIComponent(inputUrl)}`);
-                const data = await response.json();
-
-                if (data.status === "success" && data.data.downloads) {
-                    renderQualities(data.data.downloads);
-                } else {
-                    // إذا فشل المحرك الأول، نحوله للمحرك الاحتياطي المضمون
-                    window.location.href = `https://9xbuddy.com/process?url=${encodeURIComponent(inputUrl)}`;
-                }
-            } catch (error) {
-                // في حالة وجود خطأ في الـ API نحوله للاحتياطي فوراً
-                window.location.href = `https://9xbuddy.com/process?url=${encodeURIComponent(inputUrl)}`;
+                const res = await fetch('https://api.get-save.com/api/v1/vidinfo', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({url: inputUrl})
+                });
+                const data = await res.json();
+                renderQualities(data);
+            } catch(e) { 
+                alert("خطأ في الاتصال بالسيرفر! ❌");
+                document.getElementById('btn-text').innerText = "تحميل ⬇";
             }
         }
 
-        function renderQualities(downloads) {
+        function renderQualities(data) {
             document.getElementById('main-page').style.display = 'none';
             document.getElementById('qualities-page').style.display = 'flex';
-            
             const lv = document.getElementById('list-v'); 
             lv.innerHTML = '';
+            
+            // ترتيب الجودات وتصفية الروابط
+            const sorted = (data.sizes || []).sort((a, b) => (parseInt(b.height) || 0) - (parseInt(a.height) || 0));
 
-            // تصفية الروابط المباشرة التي تحتوي على فيديو وصوت
-            downloads.forEach(item => {
-                // نبحث عن الصيغ التي تدعم الفيديو والصوت معاً (Muxed)
-                if (item.type.includes("video") || item.extension === "mp4") {
-                    const qualityName = item.quality || "High Quality";
-                    lv.innerHTML += `
-                        <div class="quality-item" onclick="window.open('${item.url}', '_blank')">
-                            <div style="display:flex; flex-direction:column;">
-                                <span style="font-weight:900; color:var(--neon-blue)">${qualityName}</span>
-                                <span style="font-size:11px; color:#94a3b8">صوت + صورة ✅ (${item.extension})</span>
-                            </div>
-                            <i class="fas fa-download" style="color:var(--neon-blue)"></i>
-                        </div>`;
+            sorted.forEach(s => {
+                // تريك الصوت: في API بتاع get-save، الجودات اللي فيها صوت وصورة مع بعض
+                // غالباً بتكون mp4 وبجودات 720p أو 360p. 
+                // إحنا هنعرض الروابط المباشرة وهنوضح للمستخدم الجودة.
+                
+                let iconColor = "var(--neon-blue)";
+                let extraInfo = "جاهز للتحميل ✅";
+                
+                // لو الجودة 1080p جوجل بتبعتها فيديو بس، هننبه المستخدم
+                if(parseInt(s.height) > 720) {
+                    extraInfo = "فيديو فقط (بدون صوت) ⚠️";
+                    iconColor = "#ffcc00";
                 }
-            });
 
-            // لو ملقيناش فيديوهات، نعرض زر للموقع الاحتياطي
-            if (lv.innerHTML === '') {
-                lv.innerHTML = '<p style="text-align:center">جاري تحويلك للرابط المباشر...</p>';
-                const inputUrl = document.getElementById('url').value.trim();
-                setTimeout(() => {
-                    window.location.href = `https://9xbuddy.com/process?url=${encodeURIComponent(inputUrl)}`;
-                }, 1000);
-            }
+                const label = !s.height ? 'ملف صوتي MP3' : s.height + 'p';
+
+                lv.innerHTML += `
+                    <div class="quality-item" onclick="window.open('${s.url}', '_blank')">
+                        <div style="display:flex; flex-direction:column;">
+                            <span style="font-weight:900;">${label}</span>
+                            <span style="font-size:10px; color:#94a3b8;">${extraInfo}</span>
+                        </div>
+                        <i class="fas fa-download" style="color:${iconColor}"></i>
+                    </div>`;
+            });
         }
     </script>
 </body>
