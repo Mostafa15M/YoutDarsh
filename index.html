@@ -20,16 +20,26 @@
         body {
             min-height: 100vh; background: var(--bg-dark); color: var(--text-main);
             display: flex; flex-direction: column; align-items: center; padding: 0 20px;
-            overflow-x: hidden; position: relative;
+            overflow: hidden; position: relative; /* منع التمرير للخلفية عشان النجوم */
         }
 
-        /* خلفية النجوم المتحركة */
-        body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(2px 2px at 20% 30%, #38bdf8, transparent), radial-gradient(2px 2px at 80% 40%, #a855f7, transparent);
-            background-size: 600px 600px; animation: stars 40s linear infinite; z-index: -1;
+        /* تصميم النجوم المتحركة (6 نجوم) */
+        .star {
+            position: absolute; width: 150px; height: 150px;
+            background: radial-gradient(circle, rgba(0, 242, 255, 0.08) 0%, transparent 70%);
+            border-radius: 50%; z-index: -1; animation: move 20s infinite alternate ease-in-out;
         }
-        @keyframes stars { 0% {transform: translateY(0)} 100% {transform: translateY(-600px)} }
+        .star:nth-child(1) { top: 10%; left: 10%; background: radial-gradient(circle, rgba(188, 19, 254, 0.1) 0%, transparent 70%); animation-duration: 25s; }
+        .star:nth-child(2) { top: 60%; left: 80%; animation-duration: 18s; }
+        .star:nth-child(3) { top: 80%; left: 20%; background: radial-gradient(circle, rgba(188, 19, 254, 0.08) 0%, transparent 70%); animation-duration: 22s; }
+        .star:nth-child(4) { top: 30%; left: 70%; animation-duration: 30s; }
+        .star:nth-child(5) { top: 50%; left: 40%; background: radial-gradient(circle, rgba(0, 242, 255, 0.05) 0%, transparent 70%); animation-duration: 20s; }
+        .star:nth-child(6) { top: 15%; left: 50%; animation-duration: 28s; }
+
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(50px, 100px) scale(1.2); }
+        }
 
         .container { 
             width: 100%; max-width: 500px; z-index: 10; 
@@ -39,28 +49,23 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* اللوجو والعنوان في النص بالضبط */
         .logo-area { text-align: center; margin-bottom: 40px; }
         .logo {
             font-size: 50px; font-weight: 900;
             background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-blue));
             background-size: 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             animation: colorShift 8s linear infinite;
-            filter: drop-shadow(0 0 10px rgba(0, 242, 255, 0.3));
         }
         @keyframes colorShift { 0%{background-position:0%} 100%{background-position:200%} }
-        .subtitle { color: #94a3b8; font-size: 16px; margin-top: 5px; font-weight: 500; }
+        .subtitle { color: #94a3b8; font-size: 16px; margin-top: 5px; }
 
-        /* أيقونات المنصات */
         .platforms { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; }
         .p-icon { 
             width: 65px; height: 65px; background: var(--glass); border: 1px solid rgba(255,255,255,0.05);
             border-radius: 18px; display: flex; align-items: center; justify-content: center;
-            font-size: 26px; backdrop-filter: blur(10px); transition: 0.3s;
+            font-size: 26px; backdrop-filter: blur(10px);
         }
-        .p-icon:hover { transform: translateY(-5px); border-color: var(--neon-blue); }
 
-        /* صندوق الإدخال (مربع الرابط كبرناه ولوناه) */
         .glass-card {
             width: 100%; background: var(--glass); backdrop-filter: blur(15px);
             border: 1px solid rgba(255,255,255,0.1); padding: 35px 25px;
@@ -70,48 +75,34 @@
         #url {
             width: 100%; padding: 22px; border-radius: 18px; border: 2px solid #1e293b;
             background: #0a1120; color: white; margin-bottom: 25px; text-align: center;
-            font-size: 16px; outline: none; transition: 0.3s;
+            font-size: 16px; outline: none;
         }
-        #url:focus { border-color: var(--neon-blue); box-shadow: 0 0 15px rgba(0,242,255,0.1); }
 
         .main-btn {
             width: 100%; padding: 20px; border: none; border-radius: 18px;
             font-weight: 900; font-size: 18px; color: white; cursor: pointer;
             background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-            transition: 0.4s; box-shadow: 0 5px 15px rgba(188, 19, 254, 0.3);
+            box-shadow: 0 5px 15px rgba(188, 19, 254, 0.3);
         }
-        .main-btn:hover { transform: scale(1.02); filter: brightness(1.1); box-shadow: 0 0 25px rgba(188, 19, 254, 0.5); }
 
-        /* صفحة الجودات */
-        .quality-container { display: none; width: 100%; margin-top: 20px; }
-        .quality-header { 
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-            padding: 15px; border-radius: 15px; font-weight: 800; text-align: center; margin-bottom: 20px;
-        }
+        /* واجهة الجودات */
+        .quality-container { display: none; width: 100%; }
+        .quality-header { background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple)); padding: 15px; border-radius: 15px; font-weight: 800; text-align: center; margin-bottom: 20px; }
         .tab-group { display: flex; gap: 10px; margin-bottom: 20px; }
-        .tab { 
-            flex: 1; padding: 15px; border-radius: 15px; border: 1px solid #1e293b;
-            text-align: center; cursor: pointer; background: rgba(255,255,255,0.02);
-        }
+        .tab { flex: 1; padding: 15px; border-radius: 15px; border: 1px solid #1e293b; text-align: center; cursor: pointer; background: rgba(255,255,255,0.02); }
         .tab.active { border-color: var(--neon-blue); background: rgba(0, 229, 255, 0.1); color: var(--neon-blue); }
+        .quality-item { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); padding: 18px 20px; border-radius: 15px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.05); }
 
-        .quality-item { 
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(255,255,255,0.03); padding: 18px 20px; border-radius: 15px;
-            margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.3s;
-        }
-        .quality-item:hover { background: rgba(255,255,255,0.07); padding-right: 30px; border-color: var(--neon-blue); }
-        
-        #download-help { 
-            display: none; background: rgba(250, 204, 21, 0.1); color: #facc15;
-            padding: 15px; border-radius: 15px; font-size: 13px; text-align: center;
-            margin-top: 20px; border: 1px solid rgba(250, 204, 21, 0.2);
-        }
-
-        footer { margin-top: 50px; padding-bottom: 30px; font-size: 12px; color: #475569; text-align: center; }
+        footer { position: absolute; bottom: 20px; font-size: 12px; color: #475569; }
     </style>
 </head>
 <body>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
+    <div class="star"></div>
 
     <div class="container" id="main-page">
         <div class="logo-area">
@@ -122,14 +113,14 @@
         <div class="platforms">
             <div class="p-icon"><i class="fab fa-instagram" style="color:#e1306c"></i></div>
             <div class="p-icon"><i class="fab fa-facebook-f" style="color:#1877f2"></i></div>
-            <div class="p-icon"><i class="fab fa-tiktok"></i></div>
+            <div class="p-icon"><i class="fab fa-tiktok" style="color:#fff"></i></div>
             <div class="p-icon"><i class="fab fa-youtube" style="color:#ff0000"></i></div>
         </div>
 
         <div class="glass-card">
             <input type="text" id="url" placeholder="أدخل رابط الفيديو هنا...">
             <button class="main-btn" onclick="handleDarshDownload()">ابدأ التحميل الآن! ⬇</button>
-            <div id="status" style="margin-top:20px; font-size:14px; color:#64748b; text-align: center; font-weight: bold;">بانتظار الرابط... 🔥</div>
+            <div id="status" style="margin-top:20px; font-size:14px; color:#64748b; text-align: center; font-weight: bold;">جاهز للعمل 🔥</div>
         </div>
     </div>
 
@@ -137,13 +128,11 @@
         <div class="glass-card">
             <div class="quality-header">⬇ اختر جودة التحميل</div>
             <div class="tab-group">
-                <div class="tab active" id="v-tab" onclick="switchTab('v')"><i class="fas fa-play"></i><br><b>فيديو</b></div>
-                <div class="tab" id="a-tab" onclick="switchTab('a')"><i class="fas fa-music"></i><br><b>صوت</b></div>
+                <div class="tab active" id="v-tab" onclick="switchTab('v')">فيديو</div>
+                <div class="tab" id="a-tab" onclick="switchTab('a')">صوت</div>
             </div>
             <div id="list-v"></div>
             <div id="list-a" style="display:none"></div>
-            <div id="download-help">⚠️ إذا فتح الفيديو للمشاهدة: اضغط على الـ (3 نقاط) أسفل الفيديو ثم اختر "تنزيل".</div>
-            
             <button class="tab" style="width:100%; margin-top:20px; border-style: dashed;" onclick="location.reload()">تحميل فيديو آخر 🔄</button>
         </div>
     </div>
@@ -156,16 +145,9 @@
             const statusEl = document.getElementById('status');
             if(!inputUrl) return alert("حط الرابط يا غالي!");
 
-            // نفس منطق الكود اللي بعته عشان يشتغل صح
-            const isTT = inputUrl.includes("tiktok.com");
-            const isIG = inputUrl.includes("instagram.com");
-
-            if (isTT || isIG) {
-                statusEl.innerText = "جاري تحويلك لصفحة التحميل...";
-                statusEl.style.color = "var(--neon-blue)";
-                setTimeout(() => {
-                    window.location.href = `https://9xbuddy.com/process?url=${encodeURIComponent(inputUrl)}`;
-                }, 1000);
+            if (inputUrl.includes("tiktok.com") || inputUrl.includes("instagram.com")) {
+                statusEl.innerText = "جاري تحويلك...";
+                window.location.href = `https://9xbuddy.com/process?url=${encodeURIComponent(inputUrl)}`;
             } else {
                 fetchFromOldApi(inputUrl);
             }
@@ -173,9 +155,7 @@
 
         async function fetchFromOldApi(url) {
             const statusEl = document.getElementById('status');
-            statusEl.innerText = "جاري جلب جودات الفيديو... ✨";
-            statusEl.style.color = "var(--neon-blue)";
-            
+            statusEl.innerText = "جاري جلب البيانات... ✨";
             try {
                 const res = await fetch('https://api.get-save.com/api/v1/vidinfo', {
                     method: 'POST',
@@ -185,29 +165,19 @@
                 const data = await res.json();
                 renderQualities(data);
             } catch(e) {
-                statusEl.innerText = "حدث خطأ! الرابط قد يكون غير مدعوم ❌";
-                statusEl.style.color = "#ff4444";
+                statusEl.innerText = "خطأ في الرابط! ❌";
             }
         }
 
         function renderQualities(data) {
             document.getElementById('main-page').style.display = 'none';
             document.getElementById('qualities-page').style.display = 'flex';
-
-            const lv = document.getElementById('list-v');
-            const la = document.getElementById('list-a');
+            const lv = document.getElementById('list-v'), la = document.getElementById('list-a');
             lv.innerHTML = ''; la.innerHTML = '';
-
             const sorted = (data.sizes || []).sort((a, b) => (parseInt(b.height) || 0) - (parseInt(a.height) || 0));
-
             sorted.forEach(s => {
-                const isA = s.resolution === 'audio only' || !s.height;
-                const html = `
-                    <div class="quality-item" onclick="window.open('${s.url}', '_blank'); document.getElementById('download-help').style.display='block';">
-                        <span>${isA ? 'ملف صوتي MP3 🎧' : s.height+'p High Quality 🎬'}</span>
-                        <i class="fas fa-download" style="color:var(--neon-blue)"></i>
-                    </div>
-                `;
+                const isA = !s.height;
+                const html = `<div class="quality-item" onclick="window.open('${s.url}', '_blank')"><span>${isA ? 'صوت MP3' : s.height+'p'}</span><i class="fas fa-download" style="color:var(--neon-blue)"></i></div>`;
                 if(isA) la.innerHTML += html; else lv.innerHTML += html;
             });
         }
