@@ -3,23 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>YoutDarsh - تحميل فيديوهات بسرعة فائقة</title>
-  <meta name="description" content="YoutDarsh - أسرع موقع لتحميل يوتيوب وتيك توك بدون علامة مائية - بواسطة Bob"/>
+  <title>YoutDarsh - تحميل يوتيوب وتيك توك وإنستا</title>
+  <meta name="description" content="YoutDarsh - أفضل موقع تحميل فيديوهات بدون علامة مائية بواسطة Bob"/>
 
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --primary: #ff1744;
-      --primary-dark: #c6002f;
-      --bg1: #0d0015;
-      --bg2: #15000d;
-      --bg3: #1a001f;
-      --card: rgba(18, 18, 35, 0.82);
-      --text: #ffffff;
-      --gray: #bbbbd0;
-      --border: rgba(255, 23, 68, 0.22);
-      --shadow: 0 20px 50px rgba(255, 23, 68, 0.28);
+      --bg: #000814;
+      --neon: #00f0ff;
+      --neon-pink: #ff00aa;
+      --card: rgba(10, 10, 30, 0.75);
+      --text: #e0f7ff;
+      --gray: #a0d0ff;
+      --border: rgba(0, 240, 255, 0.3);
+      --glow: 0 0 20px rgba(0, 240, 255, 0.6);
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -27,164 +25,167 @@
     body {
       font-family: 'Tajawal', sans-serif;
       min-height: 100vh;
+      background: var(--bg) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="10" cy="10" r="1" fill="%23ffffff22"/><circle cx="30" cy="70" r="1.5" fill="%23ffffff22"/><circle cx="80" cy="20" r="0.8" fill="%23ffffff22"/><circle cx="60" cy="90" r="1.2" fill="%23ffffff22"/></svg>') repeat;
       color: var(--text);
-      background: linear-gradient(-45deg, var(--bg1), var(--bg2), var(--bg3), var(--bg1));
-      background-size: 400% 400%;
-      animation: bgFlow 22s ease infinite;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 20px;
-    }
-
-    @keyframes bgFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      padding: 30px 15px;
     }
 
     .container {
       width: 100%;
-      max-width: 720px;
+      max-width: 680px;
       background: var(--card);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-radius: 28px;
-      padding: 50px 40px;
-      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 40px 30px;
       border: 1px solid var(--border);
-      margin: 30px auto;
+      box-shadow: var(--glow), inset 0 0 30px rgba(0,240,255,0.08);
+      margin: 20px auto;
     }
 
     .logo {
-      font-size: 4.2rem;
+      font-size: 3.6rem;
       font-weight: 900;
       text-align: center;
       margin-bottom: 12px;
-      background: linear-gradient(90deg, #ff4081, var(--primary), #ff5252);
+      background: linear-gradient(90deg, var(--neon), var(--neon-pink), #00ff88);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: -2px;
+      text-shadow: 0 0 20px rgba(0,240,255,0.7);
     }
 
-    .tagline {
+    .subtitle {
       text-align: center;
       color: var(--gray);
-      font-size: 1.3rem;
-      margin-bottom: 50px;
-      line-height: 1.6;
+      font-size: 1.25rem;
+      margin-bottom: 40px;
     }
 
     .input-box {
       position: relative;
-      margin-bottom: 40px;
+      margin-bottom: 35px;
     }
 
     #url {
       width: 100%;
-      padding: 22px 24px 22px 65px;
-      font-size: 1.2rem;
-      background: rgba(25, 25, 45, 0.65);
-      border: 2px solid rgba(255, 23, 68, 0.35);
-      border-radius: 18px;
+      padding: 18px 20px 18px 60px;
+      font-size: 1.15rem;
+      background: rgba(5, 15, 40, 0.7);
+      border: 2px solid var(--border);
+      border-radius: 16px;
       color: white;
       outline: none;
-      transition: all 0.4s ease;
+      transition: all 0.35s;
     }
 
     #url:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 6px rgba(255, 23, 68, 0.25);
-      background: rgba(25, 25, 45, 0.9);
+      border-color: var(--neon);
+      box-shadow: 0 0 0 5px rgba(0,240,255,0.25);
     }
 
     .icon {
       position: absolute;
-      right: 24px;
+      right: 20px;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 1.9rem;
+      font-size: 1.8rem;
       color: var(--gray);
     }
 
     .btn-group {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      margin-bottom: 45px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 40px;
     }
 
-    button {
-      padding: 18px 36px;
+    .platform-btn {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      border: none;
+      font-size: 2.2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(6px);
+      box-shadow: inset 0 0 10px rgba(255,255,255,0.08);
+    }
+
+    .platform-btn:hover {
+      transform: scale(1.12) rotate(5deg);
+      box-shadow: 0 0 25px rgba(0,240,255,0.5);
+    }
+
+    .main-btn {
+      padding: 16px 40px;
       font-size: 1.2rem;
-      font-weight: 600;
+      font-weight: 700;
       border: none;
       border-radius: 16px;
       cursor: pointer;
-      transition: all 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+      background: linear-gradient(135deg, var(--neon), var(--neon-pink));
+      color: black;
+      transition: all 0.4s;
+      box-shadow: 0 0 20px rgba(0,240,255,0.5);
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: white;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 15px 35px rgba(255, 23, 68, 0.45);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      border: 2.5px solid var(--border);
-      color: var(--text);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      background: rgba(255, 23, 68, 0.1);
-      transform: translateY(-4px);
+    .main-btn:hover {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 0 35px rgba(0,240,255,0.8);
     }
 
     #status {
       text-align: center;
       font-size: 1.3rem;
-      font-weight: 500;
-      margin: 30px 0;
-      min-height: 2em;
-      transition: all 0.4s;
-    }
-
-    #progress {
-      height: 16px;
-      background: rgba(30, 30, 50, 0.6);
-      border-radius: 8px;
-      overflow: hidden;
       margin: 25px 0;
+      min-height: 2em;
+    }
+
+    #qualities-page {
       display: none;
-      box-shadow: inset 0 3px 8px rgba(0,0,0,0.6);
-    }
-
-    #progress-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--primary), #ff5252, #ff4081);
-      transition: width 0.6s ease;
-      box-shadow: 0 0 20px rgba(255, 23, 68, 0.7);
-    }
-
-    #qualities {
       margin-top: 40px;
-      display: none;
     }
 
-    .quality-item {
-      background: rgba(25, 25, 45, 0.5);
+    .tab-group {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .tab {
+      padding: 12px 32px;
+      font-size: 1.15rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      background: rgba(255,255,255,0.05);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      transition: all 0.3s;
+    }
+
+    .tab.active {
+      background: linear-gradient(135deg, var(--neon), var(--neon-pink));
+      color: black;
+      border: none;
+      box-shadow: 0 0 20px rgba(0,240,255,0.6);
+    }
+
+    .quality-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .quality-card {
+      background: rgba(15, 15, 40, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 16px;
       padding: 18px;
-      margin-bottom: 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -193,37 +194,55 @@
       transition: all 0.3s;
     }
 
-    .quality-item:hover {
+    .quality-card:hover {
+      border-color: var(--neon);
+      box-shadow: 0 0 25px rgba(0,240,255,0.3);
       transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(255, 23, 68, 0.25);
-      border-color: var(--primary);
     }
 
     .quality-info {
       flex: 1;
-      min-width: 200px;
     }
 
-    .quality-btn {
-      background: var(--primary);
-      color: white;
-      padding: 12px 24px;
+    .quality-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .quality-desc {
+      color: var(--gray);
+      font-size: 0.95rem;
+    }
+
+    .thumb {
+      width: 120px;
+      height: 68px;
+      object-fit: cover;
       border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    }
+
+    .dl-btn {
+      background: var(--neon);
+      color: black;
+      padding: 12px 24px;
+      border-radius: 12px;
       border: none;
+      font-weight: 700;
       cursor: pointer;
-      font-weight: 600;
       transition: all 0.3s;
     }
 
-    .quality-btn:hover {
-      background: var(--primary-dark);
-      transform: scale(1.05);
+    .dl-btn:hover {
+      background: var(--neon-pink);
+      transform: scale(1.08);
     }
 
     footer {
       margin-top: auto;
-      padding: 80px 0 50px;
-      color: #666677;
+      padding: 60px 0 40px;
+      color: #555577;
       font-size: 1rem;
       text-align: center;
     }
@@ -233,7 +252,7 @@
 
 <div class="container">
   <div class="logo">YoutDarsh</div>
-  <div class="subtitle">تحميل فيديوهات يوتيوب وتيك توك بجودة عالية وبسرعة صاروخية – بدون علامة مائية</div>
+  <div class="subtitle">تحميل فيديوهات وصوت من يوتيوب - تيك توك - إنستا - فيسبوك بجودة عالية وبسرعة</div>
 
   <div class="input-box">
     <input type="text" id="url" placeholder="الصق رابط الفيديو هنا..." autocomplete="off" />
@@ -241,10 +260,13 @@
   </div>
 
   <div class="btn-group">
-    <button class="btn-primary" onclick="getQualities()">جلب الجودات</button>
-    <button class="btn-primary" onclick="downloadBest()">تحميل أفضل جودة</button>
-    <button class="btn-secondary" onclick="downloadAudio()">تحميل الصوت فقط (MP3)</button>
+    <button class="platform-btn">📸</button>
+    <button class="platform-btn">📘</button>
+    <button class="platform-btn">🎵</button>
+    <button class="platform-btn">🎥</button>
   </div>
+
+  <button class="main-btn" onclick="getQualities()">جلب الجودات</button>
 
   <div id="status">جاهز يا بوب... 🔥</div>
 
@@ -252,7 +274,16 @@
     <div id="progress-bar"></div>
   </div>
 
-  <div id="qualities"></div>
+  <!-- صفحة الجودات -->
+  <div id="qualities-page">
+    <div class="tab-group">
+      <div class="tab active" onclick="showTab('video')">الفيديوهات</div>
+      <div class="tab" onclick="showTab('audio')">الصوت</div>
+    </div>
+
+    <div id="video-tab" class="quality-list"></div>
+    <div id="audio-tab" class="quality-list" style="display:none;"></div>
+  </div>
 </div>
 
 <footer>
@@ -265,11 +296,13 @@ const urlInput = document.getElementById('url');
 const statusEl = document.getElementById('status');
 const progressEl = document.getElementById('progress');
 const progressBar = document.getElementById('progress-bar');
-const qualitiesEl = document.getElementById('qualities');
+const qualitiesPage = document.getElementById('qualities-page');
+const videoTab = document.getElementById('video-tab');
+const audioTab = document.getElementById('audio-tab');
 
-let isLoading = false;
+let currentData = null;
 
-function updateStatus(text, color = '#4caf50') {
+function updateStatus(text, color = '#00f0ff') {
   statusEl.textContent = text;
   statusEl.style.color = color;
 }
@@ -279,96 +312,80 @@ function showLoading(show = true) {
   progressBar.style.width = show ? '0%' : '0%';
 }
 
-async function fetchAPI(endpoint, body) {
-  if (isLoading) return;
-  isLoading = true;
-  showLoading(true);
-  updateStatus('جاري الاتصال...');
+function showTab(type) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
 
-  try {
-    progressBar.style.width = '40%';
-
-    const res = await fetch(`https://api.get-save.com/api/v1/${endpoint}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
-
-    if (!res.ok) throw new Error('مشكلة في الخادم');
-
-    progressBar.style.width = '80%';
-    const data = await res.json();
-
-    progressBar.style.width = '100%';
-    return data;
-
-  } catch (err) {
-    updateStatus('خطأ: ' + err.message, '#ff1744');
-    throw err;
-  } finally {
-    isLoading = false;
-    setTimeout(() => showLoading(false), 1000);
-  }
+  videoTab.style.display = type === 'video' ? 'grid' : 'none';
+  audioTab.style.display = type === 'audio' ? 'grid' : 'none';
 }
 
 async function getQualities() {
   const url = urlInput.value.trim();
-  if (!url) return updateStatus('أدخل رابط صحيح يا بوب!', '#ff1744');
+  if (!url) return updateStatus('أدخل رابط يا وحش!', '#ff1744');
+
+  showLoading(true);
+  updateStatus('جاري جلب الجودات...');
 
   try {
-    const data = await fetchAPI('vidinfo', { url });
-    qualitiesEl.style.display = 'block';
-    qualitiesEl.innerHTML = '';
+    const res = await fetch('https://api.get-save.com/api/v1/vidinfo', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url })
+    });
+
+    if (!res.ok) throw new Error('مشكلة في الخادم');
+
+    const data = await res.json();
+    currentData = data;
+
+    showLoading(false);
+    qualitiesPage.style.display = 'block';
+
+    videoTab.innerHTML = '';
+    audioTab.innerHTML = '';
 
     if (!data.sizes || data.sizes.length === 0) {
       updateStatus('مفيش جودات متاحة حاليًا', '#ff9800');
       return;
     }
 
-    updateStatus(`تم جلب ${data.sizes.length} جودة بنجاح ✓`, '#4caf50');
+    updateStatus(`تم جلب ${data.sizes.length} جودة بنجاح ✓`, '#00f0ff');
 
-    const title = data.meta?.title || 'فيديو بدون عنوان';
-    const thumb = data.meta?.thumbnail || '';
+    // عرض صورة الفيديو في الأعلى
+    if (data.meta?.thumbnail) {
+      const thumbHtml = `<img src="${data.meta.thumbnail}" style="width:100%; max-width:420px; border-radius:16px; display:block; margin:0 auto 30px; box-shadow:0 0 30px rgba(0,240,255,0.4);" alt="thumbnail"/>`;
+      videoTab.innerHTML += thumbHtml;
+    }
 
-    let html = `<h3 style="text-align:center; margin-bottom:20px;">${title}</h3>`;
-    if (thumb) html += `<img src="${thumb}" style="width:100%; max-width:360px; border-radius:12px; display:block; margin:0 auto 25px;" alt="thumbnail"/>`;
-
-    data.sizes.forEach((item, index) => {
-      const res = item.resolution || item.height ? `${item.height || 'صوت فقط'}p` : 'غير معروف';
+    // ترتيب من الأعلى للأدنى (نفترض أن الـ sizes جاية مرتبة)
+    data.sizes.forEach(item => {
+      const isAudio = item.resolution === 'audio only' || !item.height;
+      const resText = isAudio ? 'صوت فقط' : `${item.height}p`;
       const ext = item.ext || 'mp4';
-      const size = item.filesize ? `${(item.filesize / 1024 / 1024).toFixed(1)} MB` : 'غير معروف';
+      const sizeMB = item.filesize ? `${(item.filesize / 1024 / 1024).toFixed(1)} MB` : '';
 
-      html += `
-        <div class="quality-item">
+      const card = `
+        <div class="quality-card">
           <div class="quality-info">
-            <strong>${index + 1} - ${res}</strong> • ${ext} • ${size}
+            <div class="quality-title">${resText} ${sizeMB ? `• ${sizeMB}` : ''}</div>
+            <div class="quality-desc">\( {ext} \){item.protocol ? ' • ' + item.protocol : ''}</div>
           </div>
-          <button class="quality-btn" onclick="window.open('${item.url}', '_blank')">تحميل</button>
+          <button class="dl-btn" onclick="window.open('${item.url}', '_blank')">تحميل</button>
         </div>
       `;
+
+      if (isAudio) {
+        audioTab.innerHTML += card;
+      } else {
+        videoTab.innerHTML += card;
+      }
     });
 
-    qualitiesEl.innerHTML = html;
-
-  } catch (err) {}
-}
-
-async function downloadBest() {
-  updateStatus('جاري تحميل أعلى جودة متاحة...');
-  // نفس المنطق اللي فوق، بس نختار أول url من sizes (أو أفضل واحد)
-  // لو عايز نعدل عشان يختار أعلى دقة، قولي ونضيف المنطق
-  try {
-    const data = await fetchAPI('download', { url: urlInput.value.trim(), type: 'video' });
-    if (data.url) window.open(data.url, '_blank');
-  } catch {}
-}
-
-async function downloadAudio() {
-  updateStatus('جاري تحميل الصوت (MP3)...');
-  try {
-    const data = await fetchAPI('download', { url: urlInput.value.trim(), type: 'audio' });
-    if (data.url) window.open(data.url, '_blank');
-  } catch {}
+  } catch (err) {
+    updateStatus('خطأ: ' + err.message, '#ff1744');
+    showLoading(false);
+  }
 }
 </script>
 </body>
