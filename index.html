@@ -1,318 +1,364 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Darsh Egypt - تحميل فيديوهات وصوت</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Darsh Egypt</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --bg: #000814;
-      --neon-blue: #00d4ff;
-      --neon-purple: #a200ff;
-      --card: rgba(10, 10, 30, 0.85);
-      --text: #e0f7ff;
-      --gray: #a0d0ff;
-      --glow: 0 0 25px rgba(0,212,255,0.6);
-      --border: rgba(0,212,255,0.25);
-      --btn-gradient: linear-gradient(135deg, #00d4ff, #a200ff);
-    }
+<!-- icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    * { margin:0; padding:0; box-sizing:border-box; }
+<style>
 
-    body {
-      font-family: 'Tajawal', sans-serif;
-      min-height: 100vh;
-      background: var(--bg);
-      color: var(--text);
-      background-image: radial-gradient(circle at 10% 20%, rgba(0,212,255,0.08) 0%, transparent 25%),
-                        radial-gradient(circle at 90% 80%, rgba(162,0,255,0.08) 0%, transparent 25%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 20px;
-    }
+:root{
+--bg:#020617;
+--card:#0b1225;
+--border:#1e293b;
+--blue:#00e5ff;
+--purple:#a855f7;
+--text:#e2e8f0;
+--gray:#94a3b8;
+}
 
-    .container {
-      width: 100%;
-      max-width: 680px;
-      background: var(--card);
-      backdrop-filter: blur(16px);
-      border-radius: 32px;
-      padding: 60px 40px;
-      border: 1px solid var(--border);
-      box-shadow: var(--glow);
-      margin: 20px auto;
-    }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Tajawal',sans-serif;
+}
 
-    .logo {
-      font-size: 4.8rem;
-      font-weight: 900;
-      text-align: center;
-      margin-bottom: 15px;
-      background: var(--btn-gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 35px rgba(0,212,255,0.8);
-    }
+body{
 
-    .subtitle {
-      text-align: center;
-      color: var(--gray);
-      font-size: 1.35rem;
-      margin-bottom: 50px;
-      line-height: 1.7;
-    }
+background:#020617;
+color:white;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+padding:25px;
 
-    .platforms {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      margin-bottom: 60px;
-      flex-wrap: wrap;
-    }
+/* النجوم */
+background-image:
+radial-gradient(2px 2px at 20% 30%, #38bdf8, transparent),
+radial-gradient(2px 2px at 80% 40%, #a855f7, transparent),
+radial-gradient(2px 2px at 40% 80%, #38bdf8, transparent),
+radial-gradient(1px 1px at 70% 70%, #a855f7, transparent);
 
-    .platform-icon {
-      width: 85px;
-      height: 85px;
-      border-radius: 26px;
-      background: rgba(255,255,255,0.04);
-      backdrop-filter: blur(10px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.8rem;
-      transition: all 0.4s;
-      box-shadow: inset 0 0 20px rgba(255,255,255,0.08);
-      cursor: pointer;
-    }
+background-size:600px 600px;
+}
 
-    .platform-icon:hover {
-      transform: scale(1.18) rotate(6deg);
-      box-shadow: 0 0 40px rgba(0,212,255,0.7);
-    }
+.container{
+width:100%;
+max-width:500px;
+text-align:center;
+}
 
-    .input-box {
-      position: relative;
-      margin-bottom: 45px;
-    }
+.logo{
+font-size:34px;
+font-weight:900;
 
-    #url {
-      width: 100%;
-      padding: 24px 24px 24px 70px;
-      font-size: 1.25rem;
-      background: rgba(5, 15, 40, 0.7);
-      border: 2px solid var(--border);
-      border-radius: 20px;
-      color: white;
-      outline: none;
-      transition: all 0.4s;
-    }
+background:linear-gradient(90deg,#00e5ff,#a855f7);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 
-    #url:focus {
-      border-color: var(--neon-blue);
-      box-shadow: 0 0 0 7px rgba(0,212,255,0.3);
-    }
+margin-bottom:8px;
+}
 
-    .icon {
-      position: absolute;
-      right: 26px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 2rem;
-      color: var(--gray);
-    }
+.subtitle{
+color:var(--gray);
+font-size:13px;
+margin-bottom:25px;
+}
 
-    .main-btn {
-      width: 100%;
-      padding: 22px;
-      font-size: 1.45rem;
-      font-weight: 900;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      background: var(--btn-gradient);
-      color: black;
-      transition: all 0.45s;
-      box-shadow: 0 0 35px rgba(0,212,255,0.7);
-    }
+.platforms{
+display:flex;
+justify-content:center;
+gap:10px;
+margin-bottom:30px;
+}
 
-    .main-btn:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 0 60px rgba(0,212,255,1);
-    }
+.platform-icon{
 
-    #status {
-      text-align: center;
-      font-size: 1.4rem;
-      margin: 35px 0;
-      min-height: 2em;
-    }
+width:50px;
+height:50px;
 
-    #qualities-page {
-      display: none;
-      margin-top: 60px;
-    }
+border-radius:12px;
+background:var(--card);
+border:1px solid var(--border);
 
-    .quality-title {
-      font-size: 3.5rem;
-      font-weight: 900;
-      text-align: center;
-      margin-bottom: 50px;
-      background: var(--btn-gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 45px rgba(0,212,255,0.8);
-    }
+display:flex;
+align-items:center;
+justify-content:center;
 
-    .tab-group {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin-bottom: 50px;
-    }
+font-size:20px;
+color:white;
 
-    .tab {
-      padding: 16px 55px;
-      font-size: 1.35rem;
-      font-weight: 700;
-      border-radius: 22px;
-      cursor: pointer;
-      background: rgba(255,255,255,0.05);
-      border: 2px solid var(--border);
-      transition: all 0.4s;
-    }
+transition:.3s;
+}
 
-    .tab.active {
-      background: var(--btn-gradient);
-      color: black;
-      border: none;
-      box-shadow: 0 0 45px rgba(0,212,255,0.8);
-    }
+.platform-icon:hover{
 
-    .thumb {
-      width: 100%;
-      max-width: 560px;
-      border-radius: 24px;
-      margin: 0 auto 60px;
-      display: block;
-      box-shadow: 0 0 55px rgba(0,212,255,0.7);
-    }
+border-color:var(--blue);
+box-shadow:0 0 12px var(--blue);
 
-    .quality-list {
-      display: grid;
-      gap: 22px;
-    }
+transform:translateY(-3px);
 
-    .quality-card {
-      background: rgba(15, 15, 40, 0.7);
-      border: 2px solid var(--border);
-      border-radius: 22px;
-      padding: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 25px;
-      transition: all 0.4s;
-    }
+}
 
-    .quality-card:hover {
-      border-color: var(--neon-blue);
-      box-shadow: 0 0 50px rgba(0,212,255,0.5);
-      transform: translateY(-6px);
-    }
+.input-box{
+margin-bottom:12px;
+}
 
-    .quality-info {
-      flex: 1;
-    }
+#url{
 
-    .quality-title-text {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
+width:100%;
+padding:14px;
 
-    .quality-desc {
-      color: var(--gray);
-      font-size: 1.1rem;
-    }
+border-radius:10px;
+border:1px solid var(--border);
 
-    .dl-btn {
-      background: var(--neon-blue);
-      color: black;
-      padding: 16px 36px;
-      border-radius: 18px;
-      border: none;
-      font-weight: 700;
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: all 0.35s;
-    }
+background:#0b1120;
+color:white;
 
-    .dl-btn:hover {
-      background: var(--neon-purple);
-      transform: scale(1.12);
-      box-shadow: 0 0 35px rgba(162,0,255,0.7);
-    }
+font-size:14px;
 
-    footer {
-      margin-top: auto;
-      padding: 100px 0 60px;
-      color: #555577;
-      font-size: 1.1rem;
-      text-align: center;
-    }
-  </style>
+outline:none;
+}
+
+.main-btn{
+
+width:100%;
+padding:14px;
+
+border:none;
+border-radius:12px;
+
+font-size:15px;
+font-weight:700;
+
+background:linear-gradient(90deg,#00e5ff,#a855f7);
+
+cursor:pointer;
+
+}
+
+#status{
+
+margin-top:12px;
+font-size:13px;
+color:var(--gray);
+
+}
+
+/* quality */
+
+#qualities-page{
+margin-top:30px;
+}
+
+.quality-title{
+
+background:linear-gradient(90deg,#00e5ff,#a855f7);
+
+padding:10px;
+border-radius:10px;
+
+margin-bottom:20px;
+
+font-weight:700;
+}
+
+.tab-group{
+
+display:flex;
+gap:10px;
+margin-bottom:15px;
+
+}
+
+.tab{
+
+flex:1;
+padding:10px;
+
+border-radius:10px;
+
+background:var(--card);
+border:1px solid var(--border);
+
+cursor:pointer;
+
+font-size:14px;
+}
+
+.tab.active{
+
+background:linear-gradient(90deg,#00e5ff,#a855f7);
+color:black;
+
+}
+
+.thumb{
+
+width:100%;
+border-radius:12px;
+
+margin-bottom:20px;
+
+}
+
+.quality-list{
+
+display:flex;
+flex-direction:column;
+gap:10px;
+
+}
+
+.quality-card{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+background:var(--card);
+
+border:1px solid var(--border);
+
+border-radius:12px;
+
+padding:12px;
+
+}
+
+.quality-title-text{
+
+font-size:14px;
+font-weight:700;
+
+}
+
+.quality-desc{
+
+font-size:11px;
+color:var(--gray);
+
+}
+
+.dl-btn{
+
+background:var(--blue);
+
+border:none;
+
+padding:7px 12px;
+
+border-radius:8px;
+
+font-size:13px;
+font-weight:700;
+
+cursor:pointer;
+
+}
+
+.dl-btn:hover{
+
+background:var(--purple);
+color:white;
+
+}
+
+footer{
+
+margin-top:50px;
+font-size:12px;
+color:#475569;
+
+}
+
+</style>
 </head>
+
 <body>
 
 <div class="container" id="main-page">
-  <div class="logo">Darsh Egypt</div>
-  <div class="subtitle">إنستا - فيسبوك - تيك توك - يوتيوب من تريل</div>
 
-  <div class="platforms">
-    <button class="platform-icon">📸</button>
-    <button class="platform-icon">📘</button>
-    <button class="platform-icon">🎵</button>
-    <button class="platform-icon">🎥</button>
-  </div>
+<div class="logo">Darsh Egypt</div>
 
-  <div class="input-box">
-    <input type="text" id="url" placeholder="...أدخل رابط الفيديو هنا" autocomplete="off" />
-    <span class="icon">🔗</span>
-  </div>
-
-  <button class="main-btn" onclick="getQualities()">ابدأ التحميل الآن!</button>
-
-  <div id="status">جاهز يا بوب... 🔥</div>
+<div class="subtitle">
+تنزيل من يوتيوب - تيك توك - فيسبوك - إنستا
 </div>
 
-<!-- صفحة الجودات -->
-<div class="container" id="qualities-page" style="display:none;">
-  <div class="quality-title">Quality</div>
+<div class="platforms">
 
-  <img id="thumb" class="thumb" style="display:none;" alt="thumbnail"/>
+<div class="platform-icon">
+<i class="fab fa-instagram"></i>
+</div>
 
-  <div class="tab-group">
-    <div class="tab active" onclick="showTab('video')">الفيديوهات</div>
-    <div class="tab" onclick="showTab('audio')">الصوت</div>
-  </div>
+<div class="platform-icon">
+<i class="fab fa-facebook-f"></i>
+</div>
 
-  <div id="video-tab" class="quality-list"></div>
-  <div id="audio-tab" class="quality-list" style="display:none;"></div>
+<div class="platform-icon">
+<i class="fab fa-tiktok"></i>
+</div>
+
+<div class="platform-icon">
+<i class="fab fa-youtube"></i>
+</div>
+
+</div>
+
+<div class="input-box">
+<input type="text" id="url" placeholder="أدخل رابط الفيديو هنا">
+</div>
+
+<button class="main-btn" onclick="getQualities()">
+⬇ ابدأ التحميل الآن
+</button>
+
+<div id="status">جاهز 🔥</div>
+
+</div>
+
+
+<!-- quality page -->
+
+<div class="container" id="qualities-page" style="display:none">
+
+<div class="quality-title">
+⬇ Quality
+</div>
+
+<img id="thumb" class="thumb" style="display:none">
+
+<div class="tab-group">
+
+<div class="tab active" onclick="showTab('video')">
+🎬 الفيديو
+</div>
+
+<div class="tab" onclick="showTab('audio')">
+🎧 الصوت
+</div>
+
+</div>
+
+<div id="video-tab" class="quality-list"></div>
+
+<div id="audio-tab" class="quality-list" style="display:none"></div>
+
 </div>
 
 <footer>
-  © YoutDarsh – تم تصميمه وتطويره بواسطة Bob | 2026
+© Darsh Egypt
 </footer>
 
 <script>
-// ──────────────────────────────────────────────
+
 const urlInput = document.getElementById('url');
 const statusEl = document.getElementById('status');
 const mainPage = document.getElementById('main-page');
@@ -322,83 +368,107 @@ const videoTab = document.getElementById('video-tab');
 const audioTab = document.getElementById('audio-tab');
 
 function updateStatus(text, color = '#00d4ff') {
-  statusEl.textContent = text;
-  statusEl.style.color = color;
+statusEl.textContent = text;
+statusEl.style.color = color;
 }
 
 function showTab(type) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  event.target.classList.add('active');
 
-  videoTab.style.display = type === 'video' ? 'grid' : 'none';
-  audioTab.style.display = type === 'audio' ? 'grid' : 'none';
+document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+event.target.classList.add('active');
+
+videoTab.style.display = type === 'video' ? 'flex' : 'none';
+audioTab.style.display = type === 'audio' ? 'flex' : 'none';
+
 }
 
 async function getQualities() {
-  const url = urlInput.value.trim();
-  if (!url) return updateStatus('أدخل رابط يا وحش!', '#ff1744');
 
-  updateStatus('جاري جلب الجودات... انتظر ثواني');
+const url = urlInput.value.trim();
 
-  try {
-    const res = await fetch('https://api.get-save.com/api/v1/vidinfo', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url })
-    });
+if (!url)
+return updateStatus('أدخل رابط');
 
-    if (!res.ok) throw new Error('مشكلة في الخادم');
+updateStatus('wait');
 
-    const data = await res.json();
+try {
 
-    mainPage.style.display = 'none';
-    qualitiesPage.style.display = 'block';
+const res = await fetch('https://api.get-save.com/api/v1/vidinfo', {
 
-    videoTab.innerHTML = '';
-    audioTab.innerHTML = '';
+method: 'POST',
 
-    if (!data.sizes || data.sizes.length === 0) {
-      updateStatus('مفيش جودات متاحة حاليًا', '#ff9800');
-      return;
-    }
+headers: {
+'Content-Type': 'application/json'
+},
 
-    updateStatus(`تم جلب ${data.sizes.length} جودة بنجاح ✓`, '#00d4ff');
+body: JSON.stringify({
+url
+})
 
-    // صورة الفيديو في الأعلى
-    if (data.meta?.thumbnail) {
-      thumbImg.src = data.meta.thumbnail;
-      thumbImg.style.display = 'block';
-    }
+});
 
-    // ترتيب من الأعلى للأدنى
-    const sortedSizes = [...data.sizes].sort((a, b) => (b.height || 0) - (a.height || 0));
+const data = await res.json();
 
-    sortedSizes.forEach(item => {
-      const isAudio = item.resolution === 'audio only' || !item.height;
-      const resText = isAudio ? 'صوت فقط (MP3)' : `${item.height}p`;
-      const sizeMB = item.filesize ? `${(item.filesize / 1024 / 1024).toFixed(1)} MB` : '';
+mainPage.style.display='none';
+qualitiesPage.style.display='block';
 
-      const card = `
-        <div class="quality-card">
-          <div class="quality-info">
-            <div class="quality-title-text">${resText} ${sizeMB ? `• ${sizeMB}` : ''}</div>
-            <div class="quality-desc">${item.ext || 'mp4'} • ${item.protocol || 'https'}</div>
-          </div>
-          <button class="dl-btn" onclick="window.open('${item.url}', '_blank')">تحميل ↓</button>
-        </div>
-      `;
+videoTab.innerHTML='';
+audioTab.innerHTML='';
 
-      if (isAudio) {
-        audioTab.innerHTML += card;
-      } else {
-        videoTab.innerHTML += card;
-      }
-    });
+if(data.meta?.thumbnail){
 
-  } catch (err) {
-    updateStatus('خطأ: ' + err.message, '#ff1744');
-  }
+thumbImg.src=data.meta.thumbnail;
+thumbImg.style.display='block';
+
 }
+
+data.sizes.forEach(item=>{
+
+const isAudio = item.resolution === 'audio only' || !item.height;
+
+const resText = isAudio ? 'MP3 صوت' : item.height+'p';
+
+const card = `
+
+<div class="quality-card">
+
+<div>
+
+<div class="quality-title-text">${resText}</div>
+
+<div class="quality-desc">${item.ext}</div>
+
+</div>
+
+<button class="dl-btn" onclick="window.open('${item.url}')">
+تحميل
+</button>
+
+</div>
+
+`;
+
+if(isAudio){
+
+audioTab.innerHTML+=card;
+
+}else{
+
+videoTab.innerHTML+=card;
+
+}
+
+});
+
+} catch(err){
+
+updateStatus('خطأ', '#ff1744');
+
+}
+
+}
+
 </script>
+
 </body>
 </html>
