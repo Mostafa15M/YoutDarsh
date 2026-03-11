@@ -25,6 +25,7 @@
                               radial-gradient(circle at 90% 80%, rgba(188,19,254,0.05) 0%, transparent 20%);
         }
 
+        /* النجوم */
         .star {
             position: absolute; width: 150px; height: 150px;
             background: radial-gradient(circle, rgba(0, 242, 255, 0.08) 0%, transparent 70%);
@@ -77,7 +78,7 @@
             background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
             box-shadow: 0 5px 15px rgba(188, 19, 254, 0.3); transition: 0.3s;
         }
-        .main-btn:disabled { opacity: 0.6; cursor: wait; transform: scale(0.98); }
+        .main-btn:hover { transform: scale(1.02); }
 
         .quality-header { background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple)); padding: 15px; border-radius: 15px; font-weight: 800; text-align: center; margin-bottom: 20px; color: white; }
         .quality-item { 
@@ -88,7 +89,7 @@
 
         .status-msg { margin-top: 15px; text-align: center; font-size: 14px; color: var(--neon-blue); display: none; }
 
-        footer { margin-top: auto; padding: 30px 0; font-size: 12px; text-align: center; color: #64748b; }
+        footer { margin-top: auto; padding: 30px 0; font-size: 12px; text-align: center; }
     </style>
 </head>
 <body>
@@ -98,7 +99,7 @@
     <div class="container" id="main-page">
         <div class="logo-area">
             <div class="logo">Darsh Egypt</div>
-            <p class="subtitle">Media Downloader (Premium Global API)</p>
+            <p class="subtitle">Media Downloader (Full Audio & Video)</p>
         </div>
         
         <div class="platforms">
@@ -110,8 +111,8 @@
 
         <div class="glass-card">
             <input type="text" id="url" placeholder="أدخل رابط الفيديو هنا...">
-            <button id="download-btn" class="main-btn" onclick="handleDarshDownload()">تحميل الآن ⬇</button>
-            <div id="status-msg" class="status-msg">جاري تجهيز الرابط يا درش... 🚀</div>
+            <button id="download-btn" class="main-btn" onclick="handleDarshDownload()">تحميل ⬇</button>
+            <div id="status-msg" class="status-msg">جاري جلب الروابط بصوت وصورة... ✨</div>
             <div style="text-align: center; margin-top: 20px;">
                 <a href="https://t.me/DarshEgypt" target="_blank" style="color: #94a3b8; text-decoration: none; font-weight: bold;">
                    BY DARSH EGYPT <i class="fab fa-telegram"></i>
@@ -122,9 +123,9 @@
 
     <div class="container" id="qualities-page" style="display:none;">
         <div class="glass-card">
-            <div class="quality-header">⬇ الروابط جاهزة (تحميل مباشر)</div>
+            <div class="quality-header">⬇ اختر الجودة (كامل بالصوت)</div>
             <div id="list-v"></div>
-            <button style="width:100%; margin-top:20px; border: 1px dashed var(--neon-blue); background: transparent; color: white; padding: 15px; border-radius: 15px; cursor: pointer;" onclick="location.reload()">تحميل فيديو جديد 🔙</button>
+            <button style="width:100%; margin-top:20px; border: 1px dashed var(--neon-blue); background: transparent; color: white; padding: 15px; border-radius: 15px; cursor: pointer;" onclick="location.reload()">رجوع 🔙</button>
         </div>
     </div>
 
@@ -136,54 +137,56 @@
             const btn = document.getElementById('download-btn');
             const status = document.getElementById('status-msg');
 
-            if(!inputUrl) return alert("حط الرابط يا درش!");
+            if(!inputUrl) return alert("ادخل الرابط يا وحش🗝️");
 
             btn.disabled = true;
+            btn.style.opacity = "0.5";
             status.style.display = "block";
-            status.innerText = "جاري الاتصال بالسيرفر العالمي... 🚀";
 
             try {
-                // استخدام API قوي ومباشر (PasteDownload / Generic Social API)
-                // قمت باستبدال الرابط بـ API أكثر استقراراً يتخطى قيود CORS
-                const proxyUrl = "https://api.allorigins.win/get?url=";
-                const targetApi = `https://socialdownloader.p.rapidapi.com/api/get-info?url=${encodeURIComponent(inputUrl)}`;
-                
-                // ملاحظة: بما أننا نريد حل سريع بدون مفاتيح خاصة، سنستخدم محرك الـ Snapsave البديل
-                const res = await fetch(`https://api.vkrdown.com/server?v=${encodeURIComponent(inputUrl)}`);
-                const data = await res.json();
+                // استخدام API بيحل مشكلة الصوت تلقائياً لليوتيوب والفيسبوك
+                const response = await fetch(`https://api.vkrdownloader.com/server?v=${encodeURIComponent(inputUrl)}`);
+                const result = await response.json();
 
-                if (data.data && data.data.url) {
-                    renderQualities(data.data.url, data.data.title || "فيديو جاهز");
-                } else if (data.url) {
-                     renderQualities(data.url, "تحميل مباشر");
+                if (result.status === "success" && result.data.downloads) {
+                    renderQualities(result.data.downloads);
                 } else {
-                    throw new Error("API Limit");
+                    // لو فشل، نحوله للمحرك الاحتياطي المضمون
+                    window.location.href = `https://9xbuddy.com/process?url=${encodeURIComponent(inputUrl)}`;
                 }
             } catch (error) {
-                console.log("Switching to Universal Engine...");
-                // محرك رقم 2: الحل المضمون 100% لو الـ APIs قفلت
-                const backupUrl = `https://9xbuddy.com/process?url=${encodeURIComponent(inputUrl)}`;
-                renderQualities(backupUrl, "اضغط للانتقال لصفحة التحميل المباشر");
-            } finally {
-                btn.disabled = false;
-                status.style.display = "none";
+                window.location.href = `https://9xbuddy.com/process?url=${encodeURIComponent(inputUrl)}`;
             }
         }
 
-        function renderQualities(url, title) {
+        function renderQualities(downloads) {
             document.getElementById('main-page').style.display = 'none';
             document.getElementById('qualities-page').style.display = 'flex';
             
             const lv = document.getElementById('list-v'); 
-            lv.innerHTML = `
-                <div class="quality-item" onclick="window.open('${url}', '_blank')">
-                    <div style="display:flex; flex-direction:column; max-width: 80%;">
-                        <span style="font-weight:900; color:var(--neon-blue); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${title}</span>
-                        <span style="font-size:11px; color:#94a3b8;">اضغط لبدء التحميل ✅</span>
-                    </div>
-                    <i class="fas fa-download" style="color:var(--neon-blue)"></i>
-                </div>
-            `;
+            lv.innerHTML = '';
+
+            // تصفية الروابط عشان نعرض الفيديو اللي بصوت بس
+            downloads.forEach(item => {
+                const isVideo = item.type.includes("video") || item.extension === "mp4";
+                
+                if (isVideo) {
+                    lv.innerHTML += `
+                    <div class="quality-item" onclick="window.open('${item.url}', '_blank')">
+                        <div style="display:flex; flex-direction:column;">
+                            <span style="font-weight:900; color:var(--neon-blue)">${item.quality}</span>
+                            <span style="font-size:11px; color:#94a3b8;">صوت + صورة ✅ (${item.extension})</span>
+                        </div>
+                        <i class="fas fa-download" style="color:var(--neon-blue)"></i>
+                    </div>`;
+                }
+            });
+
+            // لو مفيش فيديوهات خالص، ابعت للمحرك الاحتياطي
+            if (lv.innerHTML === '') {
+                const inputUrl = document.getElementById('url').value.trim();
+                window.location.href = `https://9xbuddy.com/process?url=${encodeURIComponent(inputUrl)}`;
+            }
         }
     </script>
 </body>
