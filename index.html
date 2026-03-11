@@ -98,7 +98,7 @@
     <div class="container" id="main-page">
         <div class="logo-area">
             <div class="logo">Darsh Egypt</div>
-            <p class="subtitle">Media Downloader (Multi-Engine)</p>
+            <p class="subtitle">Media Downloader (Vercel Optimized)</p>
         </div>
         
         <div class="platforms">
@@ -111,7 +111,7 @@
         <div class="glass-card">
             <input type="text" id="url" placeholder="أدخل رابط الفيديو هنا...">
             <button id="download-btn" class="main-btn" onclick="handleDarshDownload()">تحميل الآن ⬇</button>
-            <div id="status-msg" class="status-msg">جاري معالجة الرابط.. ثواني يا درش 🚀</div>
+            <div id="status-msg" class="status-msg">جاري تجهيز الرابط يا درش... 🚀</div>
             <div style="text-align: center; margin-top: 20px;">
                 <a href="https://t.me/DarshEgypt" target="_blank" style="color: #94a3b8; text-decoration: none; font-weight: bold;">
                    BY DARSH EGYPT <i class="fab fa-telegram"></i>
@@ -122,9 +122,9 @@
 
     <div class="container" id="qualities-page" style="display:none;">
         <div class="glass-card">
-            <div class="quality-header">⬇ الرابط جاهز للتحميل</div>
+            <div class="quality-header">⬇ الروابط جاهزة (تحميل مباشر)</div>
             <div id="list-v"></div>
-            <button style="width:100%; margin-top:20px; border: 1px dashed var(--neon-blue); background: transparent; color: white; padding: 15px; border-radius: 15px; cursor: pointer;" onclick="location.reload()">تحميل فيديو آخر 🔙</button>
+            <button style="width:100%; margin-top:20px; border: 1px dashed var(--neon-blue); background: transparent; color: white; padding: 15px; border-radius: 15px; cursor: pointer;" onclick="location.reload()">تحميل فيديو جديد 🔙</button>
         </div>
     </div>
 
@@ -136,55 +136,59 @@
             const btn = document.getElementById('download-btn');
             const status = document.getElementById('status-msg');
 
-            if(!inputUrl) return alert("حط الرابط يا درش! 🗝️");
+            if(!inputUrl) return alert("فين الرابط يا هندسة؟ 🗝️");
 
             btn.disabled = true;
             status.style.display = "block";
+            status.innerText = "جاري الاتصال بالسيرفرات... 🚀";
 
             try {
-                // استخدام API محرك Cobalt المفتوح والقوي جداً
-                const response = await fetch('https://api.cobalt.tools/api/json', {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        url: inputUrl,
-                        vQuality: "720", // جودة افتراضية
-                    })
-                });
+                // محرك رقم 1: VKR API (سريع وشامل)
+                const response = await fetch(`https://api.vkrdown.com/server?v=${encodeURIComponent(inputUrl)}`);
+                const result = await response.json();
 
-                const data = await response.json();
-
-                if (data.url) {
-                    renderQualities(data.url, "فيديو جاهز للتحميل");
-                } else if (data.status === "stream") {
-                    renderQualities(data.url, "رابط مباشر (بث)");
+                if (result.data && result.data.url) {
+                    renderQualities(result.data.url, result.data.title || "Video Download");
                 } else {
-                    throw new Error("API Error");
+                    throw new Error("Try Backup");
                 }
             } catch (error) {
-                console.error("Error:", error);
-                alert("السيرفر الأساسي مضغوط، هحولك للمحرك الاحتياطي فوراً!");
-                // المحرك الاحتياطي لو الأول فشل
-                window.location.href = `https://9xbuddy.com/process?url=${encodeURIComponent(inputUrl)}`;
+                // محرك رقم 2: في حال فشل الأول، نستخدم Cobalt API مع معالجة CORS
+                status.innerText = "بجرب المحرك الاحتياطي... 🔄";
+                try {
+                    const backupResponse = await fetch('https://api.cobalt.tools/api/json', {
+                        method: 'POST',
+                        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ url: inputUrl })
+                    });
+                    const backupData = await backupResponse.json();
+                    if (backupData.url) {
+                        renderQualities(backupData.url, "تحميل احتياطي (سريع)");
+                    } else {
+                        throw new Error("All Failed");
+                    }
+                } catch (e) {
+                    // الحل النهائي: التحويل المباشر لموقع معالجة في حال تعطل كل الـ APIs
+                    status.innerText = "جاري التحويل للتحميل المباشر... 🔗";
+                    setTimeout(() => {
+                        window.location.href = `https://9xbuddy.com/process?url=${encodeURIComponent(inputUrl)}`;
+                    }, 1000);
+                }
             } finally {
                 btn.disabled = false;
-                status.style.display = "none";
             }
         }
 
-        function renderQualities(videoUrl, title) {
+        function renderQualities(url, title) {
             document.getElementById('main-page').style.display = 'none';
             document.getElementById('qualities-page').style.display = 'flex';
             
             const lv = document.getElementById('list-v'); 
             lv.innerHTML = `
-                <div class="quality-item" onclick="window.open('${videoUrl}', '_blank')">
+                <div class="quality-item" onclick="window.open('${url}', '_blank')">
                     <div style="display:flex; flex-direction:column; max-width: 80%;">
                         <span style="font-weight:900; color:var(--neon-blue); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${title}</span>
-                        <span style="font-size:11px; color:#94a3b8;">اضغط هنا لبدء التحميل المباشر ✅</span>
+                        <span style="font-size:11px; color:#94a3b8;">اضغط للتحميل الفوري ✅</span>
                     </div>
                     <i class="fas fa-download" style="color:var(--neon-blue)"></i>
                 </div>
