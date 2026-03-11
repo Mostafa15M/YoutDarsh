@@ -21,19 +21,13 @@
         body {
             min-height: 100vh; background: var(--bg-dark); color: var(--text-main);
             display: flex; flex-direction: column; align-items: center; padding: 0 20px;
-            overflow: hidden; position: relative;
+            overflow-x: hidden; position: relative;
         }
 
-        /* تنسيق إخفاء منطقة الإعلانات تماماً */
-        #ad-layer {
-            position: absolute;
-            width: 1px; height: 1px;
-            overflow: hidden;
-            opacity: 0;
-            pointer-events: none;
-            z-index: -999;
-        }
+        /* تنسيق إخفاء منطقة الإعلانات */
+        #ad-layer { position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none; z-index: -999; }
 
+        /* النجوم المتحركة */
         .star {
             position: absolute; width: 150px; height: 150px;
             background: radial-gradient(circle, rgba(0, 242, 255, 0.08) 0%, transparent 70%);
@@ -95,6 +89,15 @@
             box-shadow: 0 5px 15px rgba(188, 19, 254, 0.3);
         }
 
+        /* تنسيق الرابط الجديد */
+        .tg-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: #94a3b8; text-decoration: none; font-weight: bold;
+            transition: 0.3s; cursor: pointer; margin-top: 20px;
+        }
+        .tg-link:hover { color: var(--neon-blue); transform: scale(1.05); }
+        .tg-link i { font-size: 18px; color: #24A1DE; }
+
         .quality-container { display: none; width: 100%; }
         .quality-header { background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple)); padding: 15px; border-radius: 15px; font-weight: 800; text-align: center; margin-bottom: 20px; }
         .tab-group { display: flex; gap: 10px; margin-bottom: 20px; }
@@ -102,7 +105,7 @@
         .tab.active { border-color: var(--neon-blue); background: rgba(0, 229, 255, 0.1); color: var(--neon-blue); }
         .quality-item { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); padding: 18px 20px; border-radius: 15px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.05); }
 
-        footer { position: absolute; bottom: 20px; font-size: 12px; color: #475569; }
+        footer { margin-top: 50px; padding-bottom: 30px; font-size: 12px; }
     </style>
 </head>
 <body>
@@ -110,13 +113,10 @@
     <div id="ad-layer">
         <script>
         (function(grtt){
-        var d = document,
-            s = d.createElement('script'),
-            l = d.scripts[d.scripts.length - 1];
+        var d = document, s = d.createElement('script'), l = d.scripts[d.scripts.length - 1];
         s.settings = grtt || {};
         s.src = "\/\/pricklyassociation.com\/buX\/V.sYdTGRl_0PYfWNcG\/reLml9huqZ\/UOl\/kuPrTHYj4uNVTHgl4tMIj\/kstQNSj\/g\/1BOaDDgUzaMqwd";
-        s.async = true;
-        s.referrerPolicy = 'no-referrer-when-downgrade';
+        s.async = true; s.referrerPolicy = 'no-referrer-when-downgrade';
         l.parentNode.insertBefore(s, l);
         })({})
         </script>
@@ -141,42 +141,39 @@
         <div class="glass-card">
             <input type="text" id="url" placeholder="أدخل رابط الفيديو هنا...">
             <button class="main-btn" onclick="handleDarshDownload()">تحميل ⬇</button>
-            <div id="status" style="margin-top:20px; font-size:14px; color:#64748b; text-align: center; font-weight: bold;">BY DARSH EGYPT ©</div>
+            <div style="text-align: center;">
+                <a href="https://t.me/DarshEgypt" target="_blank" class="tg-link">
+                   BY DARSH EGYPT <i class="fab fa-telegram"></i>
+                </a>
+            </div>
         </div>
     </div>
 
     <div class="container" id="qualities-page" style="display:none;">
         <div class="glass-card">
             <div class="quality-header">⬇ اختر الجودة </div>
-            <div class="tab-group">
-                <div class="tab active" id="v-tab" onclick="switchTab('v')">فيديو</div>
-                <div class="tab" id="a-tab" onclick="switchTab('a')">صوت</div>
-            </div>
             <div id="list-v"></div>
             <div id="list-a" style="display:none"></div>
             <button class="tab" style="width:100%; margin-top:20px; border-style: dashed;" onclick="location.reload()">الصفحه الرئيسيه☄️</button>
         </div>
     </div>
 
-    <footer>BY DARSH EGYPT © 2026</footer>
+    <footer>
+        <a href="https://t.me/DarshEgypt" target="_blank" style="color: inherit; text-decoration: none;">
+            BY DARSH EGYPT <i class="fab fa-telegram" style="color: #24A1DE; margin-right: 5px;"></i> © 2026
+        </a>
+    </footer>
 
     <script>
         async function handleDarshDownload() {
             const inputUrl = document.getElementById('url').value.trim();
-            const statusEl = document.getElementById('status');
             if(!inputUrl) return alert("ادخل الرابط🗝️");
-
             if (inputUrl.includes("tiktok.com") || inputUrl.includes("instagram.com")) {
-                statusEl.innerText = "تحويل خارجي...⛓️‍💥";
                 window.location.href = `https://9xbuddy.com/process?url=${encodeURIComponent(inputUrl)}`;
-            } else {
-                fetchFromOldApi(inputUrl);
-            }
+            } else { fetchFromOldApi(inputUrl); }
         }
 
         async function fetchFromOldApi(url) {
-            const statusEl = document.getElementById('status');
-            statusEl.innerText = "فحص الرابط...🔸";
             try {
                 const res = await fetch('https://api.get-save.com/api/v1/vidinfo', {
                     method: 'POST',
@@ -185,29 +182,17 @@
                 });
                 const data = await res.json();
                 renderQualities(data);
-            } catch(e) {
-                statusEl.innerText = "خطأ في الرابط! ❌";
-            }
+            } catch(e) { alert("خطأ في الرابط! ❌"); }
         }
 
         function renderQualities(data) {
             document.getElementById('main-page').style.display = 'none';
             document.getElementById('qualities-page').style.display = 'flex';
-            const lv = document.getElementById('list-v'), la = document.getElementById('list-a');
-            lv.innerHTML = ''; la.innerHTML = '';
+            const lv = document.getElementById('list-v'); lv.innerHTML = '';
             const sorted = (data.sizes || []).sort((a, b) => (parseInt(b.height) || 0) - (parseInt(a.height) || 0));
             sorted.forEach(s => {
-                const isA = !s.height;
-                const html = `<div class="quality-item" onclick="window.open('${s.url}', '_blank')"><span>${isA ? 'صوت MP3' : s.height+'p'}</span><i class="fas fa-download" style="color:var(--neon-blue)"></i></div>`;
-                if(isA) la.innerHTML += html; else lv.innerHTML += html;
+                lv.innerHTML += `<div class="quality-item" onclick="window.open('${s.url}', '_blank')"><span>${!s.height ? 'صوت MP3' : s.height+'p'}</span><i class="fas fa-download" style="color:var(--neon-blue)"></i></div>`;
             });
-        }
-
-        function switchTab(t) {
-            document.getElementById('v-tab').classList.toggle('active', t=='v');
-            document.getElementById('a-tab').classList.toggle('active', t=='a');
-            document.getElementById('list-v').style.display = t=='v'?'block':'none';
-            document.getElementById('list-a').style.display = t=='a'?'block':'none';
         }
     </script>
 </body>
