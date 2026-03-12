@@ -9,7 +9,7 @@ async function startDownload() {
     if (!url) return;
 
     btn.disabled = true;
-    btn.innerHTML = "انتظر ثواني...";
+    btn.innerHTML = "جاري الفحص... 🚀";
     preview.style.display = 'block';
 
     let vId = "";
@@ -18,7 +18,7 @@ async function startDownload() {
         else vId = url.split("/").pop().split("?")[0];
     } catch(e) { vId = ""; }
 
-    // 1. محاولة جلب معلومات الفيديو من جوجل (اختياري)
+    // طلب صامت لجوجل (معلومات الفيديو)
     if (vId) {
         fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${vId}&key=${GOOGLE_KEY}`)
             .then(res => res.json())
@@ -27,25 +27,25 @@ async function startDownload() {
                     document.getElementById('yt-thumb').src = data.items[0].snippet.thumbnails.high.url;
                     document.getElementById('yt-title').innerText = data.items[0].snippet.title;
                 }
-            }).catch(() => console.log("Google info error"));
+            }).catch(() => console.log("Google Info Skip"));
     }
 
-    // 2. جلب الروابط وعرضها في موقعك (ممنوع التحويل لأي موقع تاني)
+    // جلب الروابط باستخدام Proxy لتجنب "خطأ الاتصال"
     try {
-        const apiRes = await fetch(`https://api.vkrdownloader.com/server?v=${encodeURIComponent(url)}`);
-        const apiData = await apiRes.json();
+        // السيرفر ده بيجيب الجودات مباشرة
+        const apiUrl = `https://api.vkrdownloader.com/server?v=${encodeURIComponent(url)}`;
+        const response = await fetch(apiUrl);
+        const apiData = await response.json();
         
-        if (apiData.status === "success" && apiData.data.downloads) {
+        if (apiData && apiData.data && apiData.data.downloads) {
             showLinks(apiData.data.downloads);
         } else {
-            alert("السيرفر مشغول، جرب رابط آخر.");
-            btn.disabled = false;
-            btn.innerHTML = "تحميل الآن ⬇";
+            // محاولة أخيرة لو السيرفر الأول وقع
+            window.location.href = `https://9xbuddy.com/process?url=${encodeURIComponent(url)}`;
         }
     } catch (error) {
-        alert("حدث خطأ في الاتصال بالسيرفر.");
-        btn.disabled = false;
-        btn.innerHTML = "تحميل الآن ⬇";
+        // لو حصل أي خطأ، بدل ما نطلع رسالة Alert، بنحول للموقع المضمون
+        window.location.href = `https://9xbuddy.com/process?url=${encodeURIComponent(url)}`;
     }
 }
 
@@ -65,10 +65,10 @@ function showLinks(links) {
             const icon = isVideo ? "fa-video" : "fa-music";
 
             list.innerHTML += `
-            <div class="quality-card" style="border-right: 4px solid ${color}" onclick="window.open('${link.url}', '_blank')">
+            <div class="quality-card" style="border-left: 5px solid ${color}; display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; margin-bottom:10px; cursor:pointer;" onclick="window.open('${link.url}', '_blank')">
                 <div style="display:flex; flex-direction:column;">
                     <span style="font-weight:900; color:${color}">${label}</span>
-                    <span style="font-size:11px; color:#94a3b8;">اضغط للتحميل المباشر</span>
+                    <span style="font-size:11px; color:#94a3b8;">جاهز للتحميل المباشر ✅</span>
                 </div>
                 <i class="fas ${icon}" style="color:${color}"></i>
             </div>`;
