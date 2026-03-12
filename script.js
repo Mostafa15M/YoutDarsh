@@ -8,13 +8,12 @@ async function handleDarshDownload() {
 
     if(!inputUrl) return alert("ادخل الرابط يا وحش🗝️");
 
-    // إعداد حالة التحميل
     btn.disabled = true;
     btn.style.opacity = "0.5";
     status.style.display = "block";
     ytInfo.style.display = "none";
 
-    // 1. الجزء الخاص بالـ YouTube API الخاص بك (يعمل فقط مع روابط يوتيوب)
+    // فحص رابط يوتيوب لجلب البيانات من الـ API الخاص بك
     const ytRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
     const ytMatch = inputUrl.match(ytRegex);
 
@@ -31,7 +30,7 @@ async function handleDarshDownload() {
         } catch (e) { console.log("YT API Error"); }
     }
 
-    // 2. الجزء الخاص بجلب روابط التحميل (لكل المنصات كما كان سابقاً)
+    // جلب روابط التحميل وعرض صفحة الدقة
     try {
         const response = await fetch(`https://api.vkrdownloader.com/server?v=${encodeURIComponent(inputUrl)}`);
         const result = await response.json();
@@ -39,7 +38,6 @@ async function handleDarshDownload() {
         if (result.status === "success" && result.data.downloads) {
             renderQualities(result.data.downloads);
         } else {
-            // المحرك الاحتياطي
             window.location.href = `https://9xbuddy.com/process?url=${encodeURIComponent(inputUrl)}`;
         }
     } catch (error) {
@@ -55,15 +53,14 @@ function renderQualities(downloads) {
     lv.innerHTML = '';
 
     downloads.forEach(item => {
-        // فلترة لعرض روابط الفيديو فقط
         if (item.type.includes("video") || item.extension === "mp4") {
             lv.innerHTML += `
             <div class="quality-item" onclick="window.open('${item.url}', '_blank')">
                 <div style="display:flex; flex-direction:column;">
-                    <span style="font-weight:900; color:var(--neon-blue)">${item.quality}</span>
+                    <span style="font-weight:900; color:#00f2ff">${item.quality}</span>
                     <span style="font-size:11px; color:#94a3b8;">صوت + صورة ✅ (${item.extension})</span>
                 </div>
-                <i class="fas fa-download" style="color:var(--neon-blue)"></i>
+                <i class="fas fa-download" style="color:#00f2ff"></i>
             </div>`;
         }
     });
