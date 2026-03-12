@@ -1,28 +1,26 @@
-const YOUTUBE_API_KEY = 'AIzaSyDHlSDtApX-B1D3p-JCkKf_PiCMEQKCwzY';
+const API_KEY = 'AIzaSyDHlSDtApX-B1D3p-JCkKf_PiCMEQKCwzY';
 
 async function handleDarshDownload() {
     const inputUrl = document.getElementById('url').value.trim();
     const btn = document.getElementById('download-btn');
-    const status = document.getElementById('status-msg');
     const ytInfo = document.getElementById('yt-info');
 
     if(!inputUrl) return alert("ادخل الرابط يا وحش🗝️");
 
-    // فحص هل الرابط يوتيوب؟
+    // فحص الرابط: هل هو يوتيوب؟
     const ytRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
     const isYouTube = ytRegex.test(inputUrl);
 
     if (isYouTube) {
-        // --- شغل يوتيوب الجديد (صفحة الدقة) ---
+        // --- سيناريو يوتيوب (يفتح صفحة الدقة) ---
         btn.disabled = true;
         btn.style.opacity = "0.5";
-        status.style.display = "block";
-
+        
         const videoId = inputUrl.match(ytRegex)[1];
         
-        // جلب صورة وعنوان الفيديو
+        // جلب بيانات الفيديو (الصورة والعنوان)
         try {
-            const ytRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${YOUTUBE_API_KEY}`);
+            const ytRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${API_KEY}`);
             const ytData = await ytRes.json();
             if (ytData.items && ytData.items.length > 0) {
                 document.getElementById('yt-thumb').src = ytData.items[0].snippet.thumbnails.high.url;
@@ -31,7 +29,7 @@ async function handleDarshDownload() {
             }
         } catch (e) { console.log("YT API Error"); }
 
-        // جلب الروابط وعرضها في صفحة الدقة
+        // جلب الجودات وعرضها في الصفحة التانية
         try {
             const response = await fetch(`https://api.vkrdownloader.com/server?v=${encodeURIComponent(inputUrl)}`);
             const result = await response.json();
@@ -44,7 +42,8 @@ async function handleDarshDownload() {
             window.location.href = `https://9xbuddy.com/process?url=${encodeURIComponent(inputUrl)}`;
         }
     } else {
-        // --- شغل تيك توك، فيسبوك، إنستا (القديم: تحويل مباشر) ---
+        // --- سيناريو باقي المواقع (تحويل مباشر للموقع القديم) ---
+        // استبدل الرابط ده برابط الموقع القديم اللي كنت شغال بيه لو مختلف
         window.location.href = `https://9xbuddy.com/process?url=${encodeURIComponent(inputUrl)}`;
     }
 }
@@ -56,12 +55,13 @@ function renderQualities(downloads) {
     lv.innerHTML = '';
 
     downloads.forEach(item => {
+        // عرض روابط الـ MP4 اللي فيها صوت وصورة
         if (item.type.includes("video") || item.extension === "mp4") {
             lv.innerHTML += `
             <div class="quality-item" onclick="window.open('${item.url}', '_blank')">
                 <div style="display:flex; flex-direction:column;">
                     <span style="font-weight:900; color:#00f2ff">${item.quality}</span>
-                    <span style="font-size:11px; color:#94a3b8;">صوت + صورة ✅</span>
+                    <span style="font-size:11px; color:#94a3b8;">كامل صوت وصورة ✅</span>
                 </div>
                 <i class="fas fa-download" style="color:#00f2ff"></i>
             </div>`;
