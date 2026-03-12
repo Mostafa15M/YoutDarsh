@@ -8,133 +8,41 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="script.js" defer></script>
     <style>
-        :root {
-            --bg-dark: #02040a;
-            --glass: rgba(15, 23, 42, 0.8);
-            --neon-blue: #00f2ff;
-            --neon-purple: #bc13fe;
-            --text-main: #f8fafc;
-        }
-
+        :root { --bg-dark: #02040a; --glass: rgba(15, 23, 42, 0.8); --neon-blue: #00f2ff; --neon-purple: #bc13fe; --text-main: #f8fafc; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
-
-        body {
-            min-height: 100vh; background: var(--bg-dark); color: var(--text-main);
-            display: flex; flex-direction: column; align-items: center; padding: 0 20px;
-            overflow-x: hidden; position: relative;
-            background-image: radial-gradient(circle at 10% 20%, rgba(0,242,255,0.05) 0%, transparent 20%),
-                              radial-gradient(circle at 90% 80%, rgba(188,19,254,0.05) 0%, transparent 20%);
-        }
-
-        .star {
-            position: absolute; width: 150px; height: 150px;
-            background: radial-gradient(circle, rgba(0, 242, 255, 0.08) 0%, transparent 70%);
-            border-radius: 50%; z-index: -1; animation: move 20s infinite alternate ease-in-out;
-        }
-
-        @keyframes move { from { transform: translate(0, 0); } to { transform: translate(50px, 50px); } }
-
-        .container { 
-            width: 100%; max-width: 500px; z-index: 10; 
-            display: flex; flex-direction: column; align-items: center;
-            margin-top: 60px; animation: fadeIn 0.8s ease;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        .logo-area { text-align: center; margin-bottom: 40px; }
-        .logo {
-            font-size: 50px; font-weight: 900;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-blue));
-            background-size: 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: colorShift 8s linear infinite;
-        }
+        body { min-height: 100vh; background: var(--bg-dark); color: var(--text-main); display: flex; flex-direction: column; align-items: center; padding: 0 20px; overflow-x: hidden; position: relative; background-image: radial-gradient(circle at 10% 20%, rgba(0,242,255,0.05) 0%, transparent 20%), radial-gradient(circle at 90% 80%, rgba(188,19,254,0.05) 0%, transparent 20%); }
+        .container { width: 100%; max-width: 500px; z-index: 10; display: flex; flex-direction: column; align-items: center; margin-top: 60px; }
+        .logo { font-size: 50px; font-weight: 900; background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-blue)); background-size: 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: colorShift 8s linear infinite; margin-bottom: 30px; }
         @keyframes colorShift { 0%{background-position:0%} 100%{background-position:200%} }
-        
-        .platforms { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; }
-        .p-icon { 
-            width: 65px; height: 65px; background: var(--glass); border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 18px; display: flex; align-items: center; justify-content: center;
-            font-size: 26px; backdrop-filter: blur(10px);
-        }
-
-        .glass-card {
-            width: 100%; background: var(--glass); backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.1); padding: 35px 25px;
-            border-radius: 28px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
-        }
-
-        #url {
-            width: 100%; padding: 22px; border-radius: 18px; border: 2px solid #1e293b;
-            background: #0a1120; color: white; margin-bottom: 25px; text-align: center;
-            font-size: 16px; outline: none; transition: 0.3s;
-        }
-
-        .main-btn {
-            width: 100%; padding: 20px; border: none; border-radius: 18px;
-            font-weight: 900; font-size: 18px; color: white; cursor: pointer;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-            box-shadow: 0 5px 15px rgba(188, 19, 254, 0.3);
-        }
-
-        /* تنسيق معلومات اليوتيوب */
+        .glass-card { width: 100%; background: var(--glass); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); padding: 35px 25px; border-radius: 28px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+        #url { width: 100%; padding: 22px; border-radius: 18px; border: 2px solid #1e293b; background: #0a1120; color: white; margin-bottom: 25px; text-align: center; outline: none; }
+        .main-btn { width: 100%; padding: 20px; border: none; border-radius: 18px; font-weight: 900; font-size: 18px; color: white; cursor: pointer; background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple)); }
         #yt-info { margin-top: 20px; display: none; text-align: center; }
         #yt-thumb { width: 100%; border-radius: 15px; border: 1px solid var(--neon-blue); margin-bottom: 10px; }
-        #yt-title { font-size: 14px; color: #fff; margin-bottom: 10px; }
-
-        .quality-header { background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple)); padding: 15px; border-radius: 15px; font-weight: 800; text-align: center; margin-bottom: 20px; color: white; }
-        .quality-item { 
-            display: flex; justify-content: space-between; align-items: center; 
-            background: rgba(255,255,255,0.03); padding: 18px 20px; border-radius: 15px; 
-            margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.05); cursor: pointer; 
-        }
-
         .status-msg { margin-top: 15px; text-align: center; font-size: 14px; color: var(--neon-blue); display: none; }
-        footer { margin-top: auto; padding: 30px 0; font-size: 12px; text-align: center; color: #64748b; }
+        .quality-item { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); padding: 18px 20px; border-radius: 15px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.05); cursor: pointer; }
     </style>
 </head>
 <body>
-    <div class="star"></div><div class="star"></div>
-
     <div class="container" id="main-page">
-        <div class="logo-area">
-            <div class="logo">Darsh Egypt</div>
-            <p style="color: #94a3b8; margin-top: 5px;">Premium Media Downloader</p>
-        </div>
-        
-        <div class="platforms">
-            <div class="p-icon"><i class="fab fa-instagram" style="color:#e1306c"></i></div>
-            <div class="p-icon"><i class="fab fa-facebook-f" style="color:#1877f2"></i></div>
-            <div class="p-icon"><i class="fab fa-tiktok" style="color:#fff"></i></div>
-            <div class="p-icon"><i class="fab fa-youtube" style="color:#ff0000"></i></div>
-        </div>
-
+        <div class="logo">Darsh Egypt</div>
         <div class="glass-card">
-            <input type="text" id="url" placeholder="أدخل رابط الفيديو هنا...">
+            <input type="text" id="url" placeholder="ضع رابط يوتيوب أو تيك توك هنا...">
             <button id="download-btn" class="main-btn" onclick="handleDarshDownload()">تحميل ⬇</button>
-            
             <div id="yt-info">
                 <img id="yt-thumb" src="" alt="Thumbnail">
-                <p id="yt-title"></p>
+                <p id="yt-title" style="font-size: 14px;"></p>
             </div>
-
-            <div id="status-msg" class="status-msg">جاري جلب الروابط بصوت وصورة... ✨</div>
-            <div style="text-align: center; margin-top: 20px;">
-                <a href="https://t.me/DarshEgypt" target="_blank" style="color: #94a3b8; text-decoration: none; font-weight: bold; font-size: 13px;">
-                   BY DARSH EGYPT <i class="fab fa-telegram"></i>
-                </a>
-            </div>
+            <div id="status-msg" class="status-msg">جاري تجهيز الجودات... ✨</div>
         </div>
     </div>
 
     <div class="container" id="qualities-page" style="display:none;">
         <div class="glass-card">
-            <div class="quality-header">⬇ اختر الجودة (كامل بالصوت)</div>
+            <h3 style="text-align:center; margin-bottom:20px; color:var(--neon-blue);">اختر الجودة للتحميل</h3>
             <div id="list-v"></div>
-            <button style="width:100%; margin-top:20px; border: 1px dashed var(--neon-blue); background: transparent; color: white; padding: 15px; border-radius: 15px; cursor: pointer;" onclick="location.reload()">رجوع 🔙</button>
+            <button style="width:100%; margin-top:20px; background: transparent; color: white; border: 1px dashed var(--neon-blue); padding: 15px; border-radius: 15px;" onclick="location.reload()">رجوع 🔙</button>
         </div>
     </div>
-
-    <footer>BY DARSH EGYPT © 2026</footer>
 </body>
 </html>
